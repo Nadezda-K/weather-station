@@ -31,7 +31,7 @@ func FillWeather(s string, data *WeatherData) {
 	values := strings.Split(s, ",")
 	var value float64
 	if values[1] == "NULL" {
-		value = 0
+		value = nil
 	} else {
 		value, _ = strconv.ParseFloat(values[1],64)
 	}
