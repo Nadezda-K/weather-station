@@ -68,9 +68,9 @@ func FillWeather(s string, data *WeatherData) {
  func OutputData(data *WeatherData){
 	fmt.Println("airTemp:" + data.airTemp)
     fmt.Println("airPressure:" + data.airPressure)
-    fmt.Println("airPressure:" + data.airPressure)
+    fmt.Println("precipitation:" + data.precipitation)
     fmt.Println("windSpeed:" + data.windSpeed)
-    fmt.Println("airPressure" + data.airPressure)
+    fmt.Println("windDirection" + data.windDirection)
     fmt.Println("humidity:" + data.humidity)
     fmt.Println("dewPoint:" + data.dewPoint)
     fmt.Println("soilMoisture:" + data.soilMoisture)
