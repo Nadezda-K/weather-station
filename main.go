@@ -29,7 +29,11 @@ func GetMessage(reader *bufio.Reader) string {
 
 func FillWeather(s string, data *WeatherData) {
 	values := strings.Split(s, ",")
-	value, _ := strconv.ParseFloat(values[1],64)
+	if values[1] == "NULL" {
+		value = 0
+	} else {
+		value, _ := strconv.ParseFloat(values[1],64)
+	}
 	switch values[0] {
 		case "1":
 			data.airTemp = &value
