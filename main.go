@@ -9,15 +9,15 @@ import (
 )
 
 type WeatherData struct {
-    airTemp *float64
-    airPressure *float64
-    precipitation *float64
-    windSpeed *float64
-    windDirection *float64
-    humidity *float64
-    dewPoint *float64
-    soilMoisture *float64
-    cloudCover *float64
+    airTemp string
+    airPressure string
+    precipitation string
+    windSpeed string
+    windDirection string
+    humidity string
+    dewPoint string
+    soilMoisture string
+    cloudCover string
 }
 
 func GetMessage(reader *bufio.Reader) string {
@@ -29,66 +29,61 @@ func GetMessage(reader *bufio.Reader) string {
 
 func FillWeather(s string, data *WeatherData) {
 	values := strings.Split(s, ",")
-	var value float64
-	if values[1] == "NULL" {
-		value = nil
+	value, err := strconv.ParseFloat(values[1],64)
+
+	var value_str string
+	if err != nil {
+		value_str = "NULL"
 	} else {
-		value, _ = strconv.ParseFloat(values[1],64)
+		value_str = fmt.Sprintf("%g", value)
 	}
+
 	switch values[0] {
 		case "1":
-			data.airTemp = &value
+			data.airTemp = value_str
 		case "2":
-			data.airPressure= &value
+			data.airPressure= value_str
 		case "7":
-			data.precipitation = &value
+			data.precipitation = value_str
 		case "11":
-			data.windSpeed = &value
+			data.windSpeed = value_str
 		case "12":
-			data.windDirection = &value
+			data.windDirection = value_str
 		case "13":
-			data.humidity = &value
+			data.humidity = value_str
 		case "14":
-			data.dewPoint = &value
+			data.dewPoint = value_str
 		case "15":
-			data.soilMoisture = &value
+			data.soilMoisture = value_str
 		case "22":
-			data.cloudCover = &value
+			data.cloudCover = value_str
 	}
 }
 
  func ClearData(data *WeatherData) {
-	data.airTemp = nil
-    data.airPressure = nil
-    data.precipitation = nil
-   	data.windSpeed = nil
-    data.windDirection = nil
-    data.humidity = nil
-    data.dewPoint = nil
-    data.soilMoisture = nil
-    data.cloudCover = nil
+	data.airTemp = "NULL"
+    data.airPressure = "NULL"
+    data.precipitation = "NULL"
+   	data.windSpeed = "NULL"
+    data.windDirection = "NULL"
+    data.humidity = "NULL"
+    data.dewPoint = "NULL"
+    data.soilMoisture = "NULL"
+    data.cloudCover = "NULL"
 
 }
 
 
  func OutputData(data *WeatherData){
-	printValue := func (key string, value *float64) {
-		if value == nil {
-			fmt.Printf("%s:NULL\n", key)
-		} else {
-			fmt.Printf("%s:%g\n", key, *value)
-		}
-
-	}
-	printValue("airTemp", data.airTemp)
-    printValue("airPressure", data.airPressure)
-    printValue("precipitation", data.precipitation)
-    printValue("windSpeed", data.windSpeed)
-    printValue("windDirection", data.windDirection)
-    printValue("humidity", data.humidity)
-    printValue("dewPoint", data.dewPoint)
-    printValue("soilMoisture", data.soilMoisture)
-    printValue("cloudCover", data.cloudCover)
+	fmt.Printf("airTemp:%v\n", data.airTemp)
+    fmt.Printf("airPressure:%v\n", data.airPressure)
+    fmt.Printf("precipitation:%v\n", data.precipitation)
+    fmt.Printf("windSpeed:%v\n", data.windSpeed)
+    fmt.Printf("windDirection:%v\n", data.windDirection)
+    fmt.Printf("humidity:%v\n", data.humidity)
+    fmt.Printf("dewPoint:%v\n", data.dewPoint)
+    fmt.Printf("soilMoisture:%v\n", data.soilMoisture)
+    fmt.Printf("cloudCover:%v\n", data.cloudCover)
 }
 
 
@@ -98,15 +93,15 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	data := WeatherData{
-    	airTemp : nil,
-    	airPressure : nil,
-    	precipitation : nil,
-   		windSpeed : nil,
-    	windDirection : nil,
-    	humidity : nil,
-    	dewPoint : nil,
-    	soilMoisture : nil,
-    	cloudCover : nil,
+    	airTemp : "NULL",
+    	airPressure : "NULL",
+    	precipitation : "NULL",
+   		windSpeed : "NULL",
+    	windDirection : "NULL",
+    	humidity : "NULL",
+    	dewPoint : "NULL",
+    	soilMoisture : "NULL",
+    	cloudCover : "NULL",
 	}
 
 	fmt.Printf("--- Weather Station ---\n")
