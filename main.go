@@ -30,7 +30,7 @@ func GetMessage(reader *bufio.Reader) string {
 func FillWeather(s string, data *WeatherData) {
 	values := strings.Split(s, ",")
 	if values[1] == "NULL" {
-		value = 0
+		value := 0
 	} else {
 		value, _ := strconv.ParseFloat(values[1],64)
 	}
